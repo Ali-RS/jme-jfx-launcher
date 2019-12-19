@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<ScrollPane stylesheets="@launcher.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.jayfella.launcher.controller.OptionsController">
+   <content>
+      <AnchorPane prefWidth="350.0">
+         <children>
+            <GridPane hgap="10.0" layoutX="132.0" layoutY="122.0" vgap="10.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" />
+                <ColumnConstraints halignment="LEFT" hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints vgrow="NEVER" />
+                <RowConstraints vgrow="NEVER" />
+                <RowConstraints valignment="TOP" vgrow="NEVER" />
+                <RowConstraints valignment="TOP" vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints vgrow="NEVER" />
+                  <RowConstraints valignment="BOTTOM" vgrow="NEVER" />
+                  <RowConstraints valignment="BOTTOM" vgrow="ALWAYS" />
+              </rowConstraints>
+               <children>
+                  <Label text="Resolution" GridPane.rowIndex="1" />
+                  <ComboBox fx:id="resolutionComboBox" prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                  <Label text="Anistropic Filtering" GridPane.rowIndex="2" />
+                  <Slider fx:id="anistropicFilteringSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <Label text="AntiAliasing" GridPane.rowIndex="3" />
+                  <Slider fx:id="antiAliasingSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" minorTickCount="0" showTickLabels="true" showTickMarks="true" snapToTicks="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <Label text="FullScreen" />
+                  <CheckBox fx:id="fullScreenCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" />
+                  <Label text="Ambient Occlusion" GridPane.rowIndex="4" />
+                  <Label text="Bloom" GridPane.rowIndex="5" />
+                  <CheckBox fx:id="ambientOcclusionCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <CheckBox fx:id="bloomCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <Button mnemonicParsing="false" onAction="#saveButtonPressed" text="Save Changes" GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.rowIndex="7">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </Button>
+                  <Label text="Depth of Field" GridPane.rowIndex="6" />
+                  <CheckBox fx:id="depthOfFieldCheckBox" mnemonicParsing="false" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+         </children>
+      </AnchorPane>
+   </content>
+</ScrollPane>

@@ -1,0 +1,37 @@
+plugins {
+    id 'java'
+    id 'application'
+    id 'maven'
+    id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+javafx {
+    modules = [ 'javafx.controls', 'javafx.fxml' ]
+}
+
+group 'com.jayfella'
+version '1.0'
+
+sourceCompatibility = 11
+
+mainClassName = "com.jayfella.launcher.Main"
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    compile "org.jmonkeyengine:jme3-core:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-desktop:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-lwjgl3:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-plugins:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-blender:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-jogg:3.3.0-alpha5"
+    compile "org.jmonkeyengine:jme3-terrain:3.3.0-alpha5"
+
+    // JSON - jackson
+    implementation "com.fasterxml.jackson.core:jackson-core:2.10.1"
+    implementation "com.fasterxml.jackson.core:jackson-databind:2.10.1"
+    implementation "com.fasterxml.jackson.core:jackson-annotations:2.10.1"
+
+}
