@@ -3,6 +3,8 @@ package com.jayfella.launcher.controller;
 import com.jayfella.launcher.jme.DisplayModeSorter;
 import com.jayfella.launcher.jfx.PowerOfTwoStringConverter;
 import com.jayfella.launcher.settings.SavedSettings;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -52,6 +54,11 @@ public class OptionsController implements Initializable {
             resolutionComboBox.getItems().add(output);
             // if (savedSettings.getScreenConfig().isFullscreen() && displayMode.isFullscreenCapable())
         }
+
+
+        // combo box
+        resolutionComboBox.valueProperty().addListener((observableValue, s, t1) ->
+                savedSettings.getScreenConfig().setDisplayModeIndex(resolutionComboBox.getSelectionModel().getSelectedIndex()));
 
         // sliders
         anistropicFilteringSlider.setLabelFormatter(new PowerOfTwoStringConverter());
