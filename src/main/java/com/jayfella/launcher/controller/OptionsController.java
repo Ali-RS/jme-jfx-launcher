@@ -83,7 +83,7 @@ public class OptionsController implements Initializable {
             savedSettings.getPostProcessorSettings().setBloom(newValue));
 
         depthOfFieldCheckBox.selectedProperty().addListener((observableValue, oldValue, newValue) ->
-            savedSettings.getPostProcessorSettings().setDepthOfField(true));
+            savedSettings.getPostProcessorSettings().setDepthOfField(newValue));
     }
 
     protected void setSettings(SavedSettings savedSettings) {
