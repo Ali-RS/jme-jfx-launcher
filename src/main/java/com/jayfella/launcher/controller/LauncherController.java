@@ -23,9 +23,12 @@ import javafx.stage.Stage;
 import java.awt.*;
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class LauncherController implements Initializable {
 
@@ -33,11 +36,15 @@ public class LauncherController implements Initializable {
     @FXML private Label titleLabel;
 
     private AppSettings appSettings;
+
+    private Class<? extends SimpleApplication> jmeClass;
     private SimpleApplication jmeApp;
 
     private SavedSettings savedSettings;
 
     private int bitsPerPixel = 24;
+
+    private AtomicBoolean restart = new AtomicBoolean(false);
 
     public LauncherController() {
         this.appSettings = new AppSettings(true);
@@ -52,8 +59,9 @@ public class LauncherController implements Initializable {
         return anchorPane;
     }
 
-    public void setJmeApp(SimpleApplication jmeApp) {
-        this.jmeApp = jmeApp;
+    public void setJmeClass(Class<? extends SimpleApplication> jmeClass) {
+        // this.jmeApp = jmeApp;
+        this.jmeClass = jmeClass;
     }
 
     public void setTitle(String title) {
@@ -88,7 +96,8 @@ public class LauncherController implements Initializable {
 
     @FXML
     public void playButtonPressed(ActionEvent event) {
-        Platform.exit();
+
+        restart.set(false);
 
         GraphicsDevice device = GraphicsEnvironment.getLocalGraphicsEnvironment().getDefaultScreenDevice();
         DisplayMode[] modes = device.getDisplayModes();
@@ -103,10 +112,33 @@ public class LauncherController implements Initializable {
 
         appSettings.setSamples(savedSettings.getPostProcessorSettings().getJmeSamples());
 
+        try {
+            Constructor<? extends SimpleApplication> constructor = jmeClass.getConstructor();
+            try {
+                jmeApp = constructor.newInstance();
+            } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        }
+
+        if (jmeApp == null) {
+            return;
+        }
+
         jmeApp.setSettings(appSettings);
         jmeApp.setShowSettings(false);
 
         jmeApp.start();
+
+        if (restart.get()) {
+            playButtonPressed(null);
+        }
+    }
+
+    public void setRestart(boolean restart) {
+        this.restart.set(restart);
     }
 
     public void applyPostSettings() {

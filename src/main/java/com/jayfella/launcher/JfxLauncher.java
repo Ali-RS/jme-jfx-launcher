@@ -25,7 +25,7 @@ public class JfxLauncher extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    public static synchronized void initialize(SimpleApplication application) {
+    public static synchronized void initialize(Class<? extends SimpleApplication> gameClass) {
 
         new Thread(() -> launch(JfxLauncher.class)).start();
 
@@ -37,7 +37,7 @@ public class JfxLauncher extends Application {
             }
         }
 
-        INSTANCE.launcherController.setJmeApp(application);
+        INSTANCE.launcherController.setJmeClass(gameClass);
     }
 
     public static synchronized JfxLauncher getInstance() {
@@ -72,6 +72,10 @@ public class JfxLauncher extends Application {
     public void applySettings(FilterPostProcessor fpp) {
         launcherController.applyPostProcessors(fpp);
         launcherController.applyPostSettings();
+    }
+
+    public void setRestart(boolean restart) {
+        launcherController.setRestart(restart);
     }
 
     @Override
